@@ -1,230 +1,613 @@
 <!DOCTYPE html>
-<html lang="fa" dir="rtl">
+<html lang="fa">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LMC · PROFILE</title>
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', 'Exo 2', 'Orbitron', system-ui, sans-serif;
+    }
 
-<title>LMC</title>
+    body {
+      background: #0b0d15;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    /* کادر اصلی با افکت الکتریکی و رد و برق */
+    .main-container {
+      max-width: 1300px;
+      width: 100%;
+      background: #11141f;
+      border-radius: 40px;
+      padding: 25px;
+      position: relative;
+      box-shadow: 0 0 30px rgba(0, 255, 255, 0.2), 0 0 60px rgba(0, 150, 255, 0.1);
+      border: 1px solid rgba(0, 255, 255, 0.15);
+      transition: all 0.3s ease;
+    }
 
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;800&family=Tajawal:wght@400;700;800&display=swap" rel="stylesheet">
+    /* افکت الکتریکی و رد برقی متحرک (شبیه عکس) */
+    .main-container::before {
+      content: '';
+      position: absolute;
+      top: -2px;
+      left: -2px;
+      right: -2px;
+      bottom: -2px;
+      border-radius: 42px;
+      background: conic-gradient(from 0deg, #00ffff, #ff00ff, #00ffff, #ff00ff, #00ffff);
+      background-size: 300% 300%;
+      z-index: -1;
+      animation: electricBorder 4s linear infinite;
+      filter: blur(2px);
+      opacity: 0.7;
+    }
 
-<link rel="stylesheet" href="style.css">
+    .main-container::after {
+      content: '';
+      position: absolute;
+      top: -2px;
+      left: -2px;
+      right: -2px;
+      bottom: -2px;
+      border-radius: 42px;
+      background: conic-gradient(from 90deg, #ffaa00, #ff00aa, #00ffff, #ffaa00);
+      background-size: 300% 300%;
+      z-index: -1;
+      animation: electricBorder 5s linear infinite reverse;
+      filter: blur(4px);
+      opacity: 0.4;
+    }
 
+    @keyframes electricBorder {
+      0% { background-position: 0% 0%; }
+      50% { background-position: 100% 100%; }
+      100% { background-position: 0% 0%; }
+    }
+
+    /* شبکه دو ستونه */
+    .profile-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 25px;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* ========== سمت چپ: تایم پلی ========== */
+    .left-panel {
+      background: rgba(18, 22, 36, 0.7);
+      backdrop-filter: blur(6px);
+      border-radius: 30px;
+      padding: 30px 25px;
+      border: 1px solid rgba(0, 255, 255, 0.2);
+      box-shadow: inset 0 0 40px rgba(0, 255, 255, 0.05), 0 10px 30px rgba(0,0,0,0.6);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .left-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+    }
+
+    .lmc-title {
+      font-size: 2.8rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #00ffff, #aa88ff, #ff44cc);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 20px rgba(0, 255, 255, 0.4);
+      letter-spacing: 4px;
+    }
+
+    .time-play-badge {
+      background: rgba(0, 255, 255, 0.1);
+      border: 1px solid #00ffff;
+      border-radius: 40px;
+      padding: 8px 18px;
+      color: #aaffff;
+      font-weight: 600;
+      font-size: 0.9rem;
+      letter-spacing: 2px;
+      animation: pulseGlow 2s infinite;
+    }
+
+    @keyframes pulseGlow {
+      0% { box-shadow: 0 0 5px #00ffff; }
+      50% { box-shadow: 0 0 20px #00ffff, 0 0 40px #0088ff; }
+      100% { box-shadow: 0 0 5px #00ffff; }
+    }
+
+    /* لیست تایم پلی ها */
+    .playlist-stats {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      margin-top: 10px;
+    }
+
+    .game-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 18px;
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 20px;
+      border-left: 4px solid #00ffff;
+      box-shadow: 0 0 15px rgba(0, 255, 255, 0.05);
+      transition: 0.2s;
+      font-weight: 600;
+      color: #e0f0ff;
+    }
+
+    .game-item:hover {
+      transform: scale(1.01);
+      border-left: 6px solid #ff44cc;
+      background: rgba(0, 255, 255, 0.05);
+    }
+
+    .game-name {
+      font-size: 1.2rem;
+      letter-spacing: 1px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .game-name i {
+      color: #00ffff;
+      width: 24px;
+      font-size: 1.2rem;
+    }
+
+    .game-hours {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #aaffff;
+      background: rgba(0, 0, 0, 0.3);
+      padding: 4px 14px;
+      border-radius: 40px;
+      border: 1px solid rgba(0, 255, 255, 0.3);
+    }
+
+    .game-hours small {
+      font-size: 0.7rem;
+      font-weight: 400;
+      color: #88aacc;
+      margin-left: 4px;
+    }
+
+    /* بخش فوکوس و دنده */
+    .focus-section {
+      margin-top: 30px;
+      background: rgba(0, 0, 0, 0.4);
+      border-radius: 30px;
+      padding: 20px 25px;
+      border: 1px solid #ffaa00;
+      box-shadow: 0 0 30px rgba(255, 170, 0, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    .focus-text {
+      font-size: 2.2rem;
+      font-weight: 900;
+      background: linear-gradient(45deg, #ffaa00, #ff44aa);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: 6px;
+      text-shadow: 0 0 20px #ff8800;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .focus-text i {
+      font-size: 2.5rem;
+      color: #ffaa00;
+      -webkit-text-fill-color: initial;
+    }
+
+    .success-rate {
+      background: #0d0f1a;
+      padding: 8px 20px;
+      border-radius: 60px;
+      border: 1px solid #00ffaa;
+      color: #00ffaa;
+      font-weight: 700;
+      font-size: 1.6rem;
+      box-shadow: 0 0 30px rgba(0, 255, 170, 0.3);
+      animation: pulseGlow 2.5s infinite;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .success-rate i {
+      font-size: 1.8rem;
+      color: #ffdd44;
+    }
+
+    .success-rate small {
+      font-size: 0.9rem;
+      font-weight: 400;
+      color: #88ddbb;
+    }
+
+    /* ========== سمت راست: پنل اطلاعات ========== */
+    .right-panel {
+      background: rgba(14, 18, 32, 0.8);
+      backdrop-filter: blur(8px);
+      border-radius: 30px;
+      padding: 25px 20px;
+      border: 1px solid rgba(255, 0, 255, 0.2);
+      box-shadow: inset 0 0 40px rgba(255, 0, 255, 0.05), 0 10px 30px rgba(0,0,0,0.6);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .profile-avatar {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 25px;
+      border-bottom: 2px solid rgba(255, 255, 255, 0.05);
+      padding-bottom: 20px;
+    }
+
+    .profile-avatar img {
+      width: 80px;
+      height: 80px;
+      border-radius: 30px;
+      border: 3px solid #00ffff;
+      box-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
+      object-fit: cover;
+    }
+
+    .profile-name h2 {
+      color: #ffffff;
+      font-size: 1.8rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+    }
+
+    .profile-name .age {
+      color: #88aacc;
+      font-size: 1rem;
+      font-weight: 300;
+      letter-spacing: 1px;
+    }
+
+    .profile-name .age i {
+      color: #ff44aa;
+      margin-right: 6px;
+    }
+
+    /* اطلاعات + دایره لول */
+    .info-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-top: 8px;
+    }
+
+    .info-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 6px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+      color: #c0d0e0;
+      font-weight: 500;
+      font-size: 1rem;
+    }
+
+    .info-row span:first-child {
+      color: #88aadd;
+      font-weight: 400;
+    }
+
+    .info-row span:last-child {
+      font-weight: 700;
+      color: #e0f0ff;
+      background: rgba(0, 0, 0, 0.2);
+      padding: 2px 14px;
+      border-radius: 40px;
+      border: 1px solid rgba(0, 255, 255, 0.1);
+    }
+
+    /* رنک و لول با دایره */
+    .rank-level-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 15px 0 10px;
+      padding: 12px 10px;
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 60px;
+      border: 1px solid #ff44aa;
+    }
+
+    .rank-badge {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+      color: #ffcc44;
+    }
+
+    .rank-badge i {
+      font-size: 2rem;
+      color: #ffaa00;
+    }
+
+    .level-circle {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .circle-graphic {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: conic-gradient(#00ffff 0% 22%, #2a2a4a 22% 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 1.2rem;
+      color: #fff;
+      border: 2px solid #00ffff;
+      box-shadow: 0 0 30px rgba(0, 255, 255, 0.4);
+      animation: pulseGlow 3s infinite;
+    }
+
+    .level-label {
+      font-weight: 300;
+      color: #88aacc;
+    }
+
+    /* بخش گیم های دیگر + خط جداکننده */
+    .other-games-section {
+      margin-top: 20px;
+      border-top: 2px solid rgba(255, 255, 255, 0.08);
+      padding-top: 18px;
+    }
+
+    .other-games-tag {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .other-games-tag span {
+      background: rgba(0, 255, 255, 0.08);
+      border: 1px solid #00aaff;
+      padding: 6px 16px;
+      border-radius: 30px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: #aad0ff;
+      letter-spacing: 0.5px;
+    }
+
+    /* لینک استیم و موزیک پلیر */
+    .steam-music {
+      margin-top: 25px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .steam-link {
+      background: #1a2a3a;
+      padding: 12px 16px;
+      border-radius: 60px;
+      border: 1px solid #00aaff;
+      text-align: center;
+      transition: 0.2s;
+    }
+
+    .steam-link a {
+      color: #88ddff;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      letter-spacing: 1px;
+    }
+
+    .steam-link a i {
+      margin-right: 12px;
+      color: #00aaff;
+    }
+
+    .steam-link:hover {
+      background: #0f1f2f;
+      border-color: #ff44aa;
+      box-shadow: 0 0 20px rgba(255, 68, 170, 0.3);
+    }
+
+    .music-player-box {
+      background: #0d0f1a;
+      border-radius: 60px;
+      padding: 12px 20px;
+      border: 1px solid #ff44aa;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: #ddddff;
+    }
+
+    .music-player-box i {
+      color: #ff44aa;
+      font-size: 1.3rem;
+    }
+
+    .music-player-box span {
+      font-weight: 300;
+      font-size: 0.9rem;
+    }
+
+    /* responsive */
+    @media (max-width: 900px) {
+      .profile-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+      .lmc-title {
+        font-size: 2rem;
+      }
+    }
+  </style>
 </head>
-
 <body>
 
-<div id="particles"></div>
+<div class="main-container">
+  <div class="profile-grid">
 
-<header class="top-logo">
-    <h1>LMC</h1>
-</header>
+    <!-- ========== پنل چپ ========== -->
+    <div class="left-panel">
+      <div class="left-header">
+        <div class="lmc-title">LMC</div>
+        <div class="time-play-badge"><i class="fas fa-clock"></i> TIME PLAY</div>
+      </div>
 
-<div class="main-grid">
-
-    <!-- LEFT PANEL -->
-
-    <section class="panel left-panel">
-
-        <div class="panel-title">
-            TIME PLAY
+      <div class="playlist-stats">
+        <div class="game-item">
+          <span class="game-name"><i class="fas fa-crosshairs"></i> CS2</span>
+          <span class="game-hours">820 <small>h</small></span>
         </div>
+        <div class="game-item">
+          <span class="game-name"><i class="fas fa-shield-alt"></i> R6</span>
+          <span class="game-hours">500 <small>h</small></span>
+        </div>
+        <div class="game-item">
+          <span class="game-name"><i class="fas fa-ghost"></i> Phasmophobia</span>
+          <span class="game-hours">—</span>
+        </div>
+        <div class="game-item">
+          <span class="game-name"><i class="fas fa-box"></i> Arena Breakout</span>
+          <span class="game-hours">300 <small>h</small></span>
+        </div>
+        <div class="game-item">
+          <span class="game-name"><i class="fas fa-gamepad"></i> Battlefield 6</span>
+          <span class="game-hours">—</span>
+        </div>
+        <div class="game-item">
+          <span class="game-name"><i class="fas fa-cog"></i> Rust / Others</span>
+          <span class="game-hours">220 <small>h</small></span>
+        </div>
+      </div>
 
-        <div class="game-box">
+      <!-- فوکوس و دنده با درصد موفقیت -->
+      <div class="focus-section">
+        <div class="focus-text">
+          <i class="fas fa-bolt"></i> FOCUS
+        </div>
+        <div class="success-rate">
+          <i class="fas fa-chart-line"></i> 72% <small>SUCCESS</small>
+        </div>
+      </div>
 
-         <div class="game-image">
-    <img class="game-icon"
-    src="https://www.kindpng.com/picc/m/12-128128_rainbow-six-siege-logo-png-rainbow-six-siege.png">
+      <!-- اضافه کردن یه متن کوچک زیر فوکوس (اختیاری) -->
+      <div style="margin-top: 16px; color: #557799; font-size: 0.8rem; text-align: center; letter-spacing: 2px; border-top: 1px solid rgba(255,255,255,0.03); padding-top: 12px;">
+        <i class="fas fa-circle" style="color: #00ffaa; font-size: 0.5rem;"></i> NOT LUCK. IT'S FOCUS.
+      </div>
+    </div>
+
+    <!-- ========== پنل راست ========== -->
+    <div class="right-panel">
+      <!-- تصویر پروفایل (از گیت هاب) -->
+      <div class="profile-avatar">
+        <img src="https://raw.githubusercontent.com/zinoxplus/LMC/main/photo28308827938.jpg" alt="profile">
+        <div class="profile-name">
+          <h2>مهدی‌یار</h2>
+          <div class="age"><i class="fas fa-calendar-alt"></i> سن ۲۰</div>
+        </div>
+      </div>
+
+      <!-- اطلاعات اصلی -->
+      <div class="info-grid">
+        <div class="info-row">
+          <span>CS2 / R6 / Phasmophobia</span>
+          <span>•</span>
+        </div>
+        <div class="info-row">
+          <span>Arena Breakout / Battlefield 6</span>
+          <span>•</span>
+        </div>
+        <div class="info-row">
+          <span>Rust / Other Games</span>
+          <span>•</span>
+        </div>
+      </div>
+
+      <!-- خط جداکننده بین بخش بالا و پایین -->
+      <hr style="border: 1px solid rgba(255, 255, 255, 0.05); margin: 18px 0;">
+
+      <!-- تاپ رنک و لول با دایره -->
+      <div class="rank-level-row">
+        <div class="rank-badge">
+          <i class="fas fa-trophy"></i>
+          <span>TOP CS RANK</span>
+          <span style="color: #ffcc44; font-size: 1.3rem;">12,000</span>
+        </div>
+        <div class="level-circle">
+          <div class="circle-graphic">22</div>
+          <span class="level-label">LEVEL</span>
+        </div>
+      </div>
+
+      <!-- بخش بقیه گیم ها (با خط جدا کننده) -->
+      <div class="other-games-section">
+        <div style="display: flex; justify-content: space-between; color: #88aacc; font-weight: 300; font-size: 0.9rem;">
+          <span><i class="fas fa-gamepad"></i> OTHER GAMES</span>
+          <span>220 h</span>
+        </div>
+        <div class="other-games-tag">
+          <span>Rust</span>
+          <span>Phasmophobia</span>
+          <span>BF6</span>
+          <span>Arena</span>
+          <span>+more</span>
+        </div>
+      </div>
+
+      <!-- لینک استیم و موزیک پلیر -->
+      <div class="steam-music">
+        <div class="steam-link">
+          <a href="https://steamcommunity.com/id/M_LMC/" target="_blank">
+            <i class="fab fa-steam"></i> steamcommunity.com/id/M_LMC/
+          </a>
+        </div>
+        <div class="music-player-box">
+          <i class="fas fa-music"></i>
+          <span>MUSIC PLAYER</span>
+          <i class="fas fa-play-circle" style="color: #00ffff;"></i>
+          <span style="font-size: 0.7rem; color: #6688aa;">zinoxplus.github.io/me/</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
 </div>
-
-            <div class="game-name">
-                CS 2
-            </div>
-
-            <div class="hours">
-                820
-                <span>HOURS</span>
-            </div>
-
-        </div>
-
-        <div class="game-box">
-
-          <div class="game-image">
-<img class="game-icon"
-src="https://www.kindpng.com/picc/m/12-128128_rainbow-six-siege-logo-png-rainbow-six-siege.png">
-</div>
-
-            <div class="game-name">
-                R6
-            </div>
-
-            <div class="hours">
-                500
-                <span>HOURS</span>
-            </div>
-
-        </div>
-
-        <div class="game-box">
-
-        <div class="game-image">
-<img class="game-icon"
-src="https://www.steamgriddb.com/logo/117916">
-</div>
-
-            <div class="game-name">
-                ARENA BREAKOUT
-            </div>
-
-            <div class="hours">
-                300
-                <span>HOURS</span>
-            </div>
-
-        </div>
-
-        <div class="game-box">
-
-            <div class="game-image other"></div>
-
-            <div class="game-name">
-                OTHER GAMES
-            </div>
-
-            <div class="hours">
-                220
-                <span>HOURS</span>
-            </div>
-
-        </div>
-
-        <div class="focus-box">
-            <h2>FOCUS</h2>
-            <p>FOCUS. PLAY. DOMINATE.</p>
-        </div>
-
-        <div class="success-box">
-
-            <div class="circle-progress"
-                 data-value="72">
-                <span>72%</span>
-            </div>
-
-            <div class="success-text">
-
-                <h3>SUCCESS RATE</h3>
-
-                <p>
-                    SUCCESS IS NOT LUCK.
-                    IT'S FOCUS.
-                </p>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-
-    <!-- RIGHT PANEL -->
-
-    <section class="panel right-panel">
-
-        <div class="profile-card">
-
-            <div class="profile-header">
-
-                <div class="profile-image">
-
-                    <img
-                    src="https://raw.githubusercontent.com/zinoxplus/LMC/85fb3d469a20bc1ca65e0c28698794b3150f7d17/photo28308827938.jpg"
-                    alt="Profile">
-
-                </div>
-
-                <div class="profile-info">
-
-                    <h2>مهدی‌یار</h2>
-
-                    <p>۲۰ سال</p>
-
-                </div>
-
-            </div>
-
-            <div class="divider"></div>
-
-            <div class="games-list">
-
-                <h3>GAMES</h3>
-
-                <p>
-                    CS2 /
-                    R6 /
-                    Phasmophobia /
-                    Arena Breakout /
-                    Battlefield 6 /
-                    Rust /
-                    Other Games
-                </p>
-
-            </div>
-
-            <div class="stats-grid">
-
-                <div class="rank-box">
-
-                    <span>TOP CS RANK</span>
-
-                    <h2>12000</h2>
-
-                </div>
-
-                <div class="level-box">
-
-                    <span>LEVEL</span>
-
-                    <div class="circle-progress level-circle"
-                         data-value="22">
-                        <span>22</span>
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
-
-</div>
-
-<footer class="bottom-bar">
-
-    <a class="steam-box"
-       href="https://steamcommunity.com/id/M_LMC/"
-       target="_blank">
-
-        STEAM ACCOUNT
-
-    </a>
-
-    <a class="music-box"
-       href="https://zinoxplus.github.io/me/"
-       target="_blank">
-
-        MUSIC PLAYER
-
-    </a>
-
-</footer>
-
-<script src="script.js"></script>
 
 </body>
 </html>
