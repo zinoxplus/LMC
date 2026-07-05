@@ -400,3 +400,447 @@ body::before{
 
     gap:20px;
 }
+
+/* RANK BOX */
+
+.rank-box,
+.level-box{
+
+    position:relative;
+
+    min-height:220px;
+
+    border:1px solid rgba(139,92,255,.4);
+
+    background:
+    linear-gradient(
+    180deg,
+    rgba(25,10,60,.8),
+    rgba(10,5,25,.8)
+    );
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+    overflow:hidden;
+}
+
+.rank-box::before,
+.level-box::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:200%;
+
+    height:2px;
+
+    background:
+    linear-gradient(
+    90deg,
+    transparent,
+    #fff,
+    transparent
+    );
+
+    animation:
+    scanLine 4s linear infinite;
+}
+
+@keyframes scanLine{
+
+    from{
+        top:-10%;
+    }
+
+    to{
+        top:110%;
+    }
+
+}
+
+.rank-box span,
+.level-box span{
+
+    color:#b68cff;
+
+    font-size:14px;
+
+    letter-spacing:2px;
+}
+
+.rank-box h2{
+
+    font-size:65px;
+
+    margin-top:15px;
+
+    color:white;
+
+    text-shadow:
+    0 0 10px var(--primary),
+    0 0 30px var(--primary);
+}
+
+/* PROGRESS CIRCLE */
+
+.circle-progress{
+
+    width:160px;
+    height:160px;
+
+    border-radius:50%;
+
+    position:relative;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    margin:auto;
+
+    background:
+    conic-gradient(
+    var(--primary) 0deg,
+    var(--secondary) 260deg,
+    rgba(255,255,255,.08) 260deg
+    );
+
+    box-shadow:
+    0 0 25px var(--primary),
+    inset 0 0 20px rgba(255,255,255,.15);
+
+    animation:
+    glowCircle 3s infinite alternate;
+}
+
+.circle-progress::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:120px;
+    height:120px;
+
+    border-radius:50%;
+
+    background:#090318;
+
+    box-shadow:
+    inset 0 0 15px rgba(255,255,255,.1);
+}
+
+.circle-progress span{
+
+    position:relative;
+
+    z-index:2;
+
+    font-size:32px;
+
+    color:white;
+
+    font-weight:800;
+}
+
+@keyframes glowCircle{
+
+    from{
+
+        box-shadow:
+        0 0 15px var(--primary),
+        inset 0 0 20px rgba(255,255,255,.15);
+
+    }
+
+    to{
+
+        box-shadow:
+        0 0 40px var(--primary),
+        0 0 80px var(--secondary),
+        inset 0 0 20px rgba(255,255,255,.15);
+
+    }
+
+}
+
+.level-circle{
+
+    width:180px;
+    height:180px;
+}
+
+/* SUCCESS BOX */
+
+.success-box{
+
+    margin-top:30px;
+
+    display:flex;
+
+    gap:25px;
+
+    align-items:center;
+
+    border:
+    1px solid rgba(139,92,255,.4);
+
+    padding:20px;
+
+    background:
+    rgba(10,5,25,.8);
+}
+
+.success-text h3{
+
+    color:#b68cff;
+
+    margin-bottom:10px;
+}
+
+.success-text p{
+
+    line-height:1.8;
+}
+
+/* FOOTER */
+
+.bottom-bar{
+
+    width:95%;
+
+    margin:auto;
+
+    display:grid;
+
+    grid-template-columns:
+    1fr 1fr;
+
+    gap:25px;
+
+    padding-bottom:50px;
+}
+
+.steam-box,
+.music-box{
+
+    position:relative;
+
+    height:90px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    text-decoration:none;
+
+    color:white;
+
+    font-size:28px;
+
+    letter-spacing:2px;
+
+    border:
+    1px solid rgba(139,92,255,.5);
+
+    background:
+    linear-gradient(
+    90deg,
+    rgba(20,10,45,.9),
+    rgba(10,5,25,.9)
+    );
+
+    overflow:hidden;
+
+    transition:.4s;
+}
+
+.steam-box:hover,
+.music-box:hover{
+
+    transform:
+    translateY(-5px);
+
+    box-shadow:
+    0 0 25px var(--primary),
+    0 0 50px var(--secondary);
+}
+
+.steam-box::before,
+.music-box::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:300px;
+    height:300px;
+
+    background:
+    radial-gradient(
+    circle,
+    rgba(255,255,255,.25),
+    transparent
+    );
+
+    animation:
+    rotateGlow 8s linear infinite;
+}
+
+@keyframes rotateGlow{
+
+    from{
+        transform:rotate(0deg);
+    }
+
+    to{
+        transform:rotate(360deg);
+    }
+
+}
+
+/* ELECTRIC FLASH */
+
+@keyframes electricFlash{
+
+    0%,100%{
+        opacity:.4;
+    }
+
+    20%{
+        opacity:1;
+    }
+
+    40%{
+        opacity:.2;
+    }
+
+    60%{
+        opacity:1;
+    }
+
+    80%{
+        opacity:.5;
+    }
+}
+
+.panel,
+.game-box,
+.rank-box,
+.level-box,
+.steam-box,
+.music-box{
+
+    animation:
+    electricFlash 5s infinite;
+}
+
+/* SCROLLBAR */
+
+::-webkit-scrollbar{
+
+    width:10px;
+}
+
+::-webkit-scrollbar-track{
+
+    background:#090318;
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:var(--primary);
+
+    box-shadow:
+    0 0 10px var(--primary);
+}
+
+/* RESPONSIVE */
+
+@media(max-width:1100px){
+
+    .main-grid{
+
+        grid-template-columns:
+        1fr;
+    }
+
+    .bottom-bar{
+
+        grid-template-columns:
+        1fr;
+    }
+
+    .profile-header{
+
+        flex-direction:column;
+    }
+
+    .stats-grid{
+
+        grid-template-columns:
+        1fr;
+    }
+
+    .success-box{
+
+        flex-direction:column;
+    }
+
+}
+
+@media(max-width:700px){
+
+    .top-logo h1{
+
+        font-size:55px;
+    }
+
+    .panel-title{
+
+        font-size:34px;
+    }
+
+    .focus-box h2{
+
+        font-size:45px;
+    }
+
+    .game-name{
+
+        font-size:20px;
+    }
+
+    .hours{
+
+        font-size:26px;
+    }
+
+    .profile-image img{
+
+        width:130px;
+        height:130px;
+    }
+
+    .profile-info h2{
+
+        font-size:34px;
+    }
+
+}
+
+
+
+
+
