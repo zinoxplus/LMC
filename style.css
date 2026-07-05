@@ -994,5 +994,51 @@ body::before{
 
 }
 
+.panel{
 
+clip-path:polygon(
+20px 0,
+100% 0,
+100% calc(100% - 20px),
+calc(100% - 20px) 100%,
+0 100%,
+0 20px
+);
+
+}
+.panel::before{
+
+content:"";
+
+position:absolute;
+
+inset:-2px;
+
+background:
+linear-gradient(
+90deg,
+transparent,
+#ffffff,
+#66ccff,
+#ffffff,
+transparent
+);
+
+background-size:300% 100%;
+
+animation:
+electricBorder 2s linear infinite;
+
+}
+@keyframes electricBorder{
+
+0%{
+background-position:-300% 0;
+}
+
+100%{
+background-position:300% 0;
+}
+
+}
 
