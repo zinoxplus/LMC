@@ -840,7 +840,159 @@ body::before{
 
 }
 
+/* PARTICLES */
 
+.particle{
+
+    position:fixed;
+
+    border-radius:50%;
+
+    background:#8b5cff;
+
+    box-shadow:
+    0 0 10px #8b5cff,
+    0 0 20px #3d7bff;
+
+    animation:
+    particleFloat linear infinite;
+}
+
+@keyframes particleFloat{
+
+    from{
+
+        transform:
+        translateY(0);
+
+        opacity:0;
+    }
+
+    20%{
+
+        opacity:1;
+    }
+
+    100%{
+
+        transform:
+        translateY(-200px);
+
+        opacity:0;
+    }
+
+}
+
+/* ELECTRIC HIT */
+
+.electric-hit{
+
+    box-shadow:
+    0 0 20px white,
+    0 0 40px #8b5cff,
+    0 0 80px #3d7bff !important;
+}
+
+/* SCAN LINE */
+
+.scan-line{
+
+    position:fixed;
+
+    left:0;
+    top:-10%;
+
+    width:100%;
+    height:120px;
+
+    pointer-events:none;
+
+    background:
+    linear-gradient(
+    transparent,
+    rgba(139,92,255,.15),
+    transparent
+    );
+
+    animation:
+    scanMove 6s linear infinite;
+}
+
+@keyframes scanMove{
+
+    from{
+        top:-20%;
+    }
+
+    to{
+        top:120%;
+    }
+
+}
+
+/* CURSOR GLOW */
+
+.cursor-glow{
+
+    position:fixed;
+
+    width:250px;
+    height:250px;
+
+    border-radius:50%;
+
+    pointer-events:none;
+
+    transform:
+    translate(-50%,-50%);
+
+    background:
+    radial-gradient(
+    circle,
+    rgba(139,92,255,.25),
+    transparent 70%
+    );
+
+    z-index:9999;
+}
+
+/* HUD SYMBOLS */
+
+.hud-symbol{
+
+    position:fixed;
+
+    color:#8b5cff;
+
+    font-size:20px;
+
+    opacity:.2;
+
+    pointer-events:none;
+
+    animation:
+    hudFloat 12s linear infinite;
+}
+
+@keyframes hudFloat{
+
+    from{
+
+        transform:
+        translateY(0)
+        rotate(0deg);
+
+    }
+
+    to{
+
+        transform:
+        translateY(-300px)
+        rotate(360deg);
+
+    }
+
+}
 
 
 
